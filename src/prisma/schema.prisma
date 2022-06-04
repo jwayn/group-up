@@ -14,7 +14,6 @@ model Event {
   id            String        @id @default(uuid()) @unique
   name          String        @db.Text
   createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
   propositions  Proposition[]
 }
 
@@ -28,7 +27,8 @@ model Proposition {
 }
 
 model Vote {
+  id            String      @id @default(uuid()) @unique           
   proposition   Proposition @relation(fields: [propositionId], references: [id])
-  propositionId String      @unique
+  propositionId String
   createdAt     DateTime    @default(now())
 }
