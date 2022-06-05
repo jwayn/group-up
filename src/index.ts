@@ -13,9 +13,10 @@ const port: number = Number(process.env.PORT) || 3000;
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(express.static("src/public"));
 
 // Routes
-app.use("/event", EventRouter);
+app.use("/api/event", EventRouter);
 
 // Server setup
 app.listen(port, () => {

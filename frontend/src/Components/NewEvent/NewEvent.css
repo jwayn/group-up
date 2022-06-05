@@ -1,0 +1,145 @@
+.event-details {
+  display: flex;
+  flex-direction: column;
+  max-width: 325px;
+  margin: 0 auto;
+}
+
+.event-name-group {
+  position: relative;
+}
+
+.event-name {
+  box-sizing: border-box;
+  margin-bottom: 24px;
+  height: 58px;
+  border-radius: 8px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.25);
+  padding: 24px 24px 12px 24px;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  width: 100%;
+}
+
+.event-name:focus + .event-name-label,
+.event-name:not(:placeholder-shown) + .event-name-label {
+  top: 5px;
+  font-size: 12px;
+}
+
+.event-name-label {
+  position: absolute;
+  color: rgba(255, 255, 255, 0.5);
+  left: 24px;
+  top: 16px;
+  font-size: 20px;
+  font-weight: 600;
+  pointer-events: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.propositions {
+  background-color: rgba(255, 255, 255, 0.25);
+  padding: 24px;
+  border-radius: 8px;
+}
+
+.new-slot {
+  height: 36px;
+  border-radius: 80px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.25);
+  color: white;
+  font-size: 14px;
+  width: 100%;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+}
+
+.save-event {
+  height: 56px;
+  margin-top: 24px;
+  border-radius: 80px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.25);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+}
+
+.propositions h3 {
+  margin-top: 0;
+  margin-bottom: 24px;
+}
+
+.btn-disabled {
+  color: rgba(255, 255, 255, 0.25);
+  cursor: not-allowed;
+}
+
+.proposition-items {
+  margin-bottom: 36px;
+}
+.delete-proposition {
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.delete-proposition:hover {
+  transform: translateX(4px);
+}
+
+.delete-proposition > svg {
+  stroke: white;
+}
+.delete-proposition:hover > svg {
+  fill: red;
+}
+.proposition-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  font-weight: 600;
+  align-items: center;
+}
+
+.add-time-slot input {
+  box-sizing: border-box;
+  margin-bottom: 24px;
+  height: 40px;
+  text-align: center;
+  border-radius: 8px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.25);
+  padding: 12px;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  width: 100%;
+}
+
+.save-time-slot,
+.cancel-time-slot {
+  border-radius: 8px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.25);
+  color: white;
+  padding: 8px 16px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.time-slot-btn-container {
+  display: flex;
+  justify-content: space-around;
+}

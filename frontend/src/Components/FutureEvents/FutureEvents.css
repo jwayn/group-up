@@ -1,0 +1,75 @@
+.future-events {
+  background-color: rgba(255, 255, 255, 0.25);
+  border-radius: 8px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.future-events * {
+  box-sizing: border-box;
+}
+
+.events {
+  width: 325px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.event {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.event:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.event > a {
+  text-decoration: none;
+  font-weight: 600;
+  color: white;
+}
+
+.copy-event-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease-out;
+  position: relative;
+}
+
+.copy-event-btn > svg {
+  stroke: white;
+}
+
+.copy-text {
+  position: absolute;
+  left: -80px;
+  top: -10px;
+  width: 200px;
+  color: white;
+  font-weight: 600;
+  opacity: 0;
+  transition: all 0.3s ease-out;
+}
+
+.text-visible {
+  opacity: 1;
+  top: -20px;
+}
+
+.new-event-btn {
+  background-color: rgba(255, 255, 255, 0.25);
+  border-radius: 48px;
+  padding: 20px;
+  margin-top: 24px;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 600;
+  text-decoration: none;
+}

@@ -1,5 +1,7 @@
 import { NextFunction, Router, Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
+import { randomBytes } from "crypto";
+
 const prisma = new PrismaClient();
 
 import createError from "http-errors";
@@ -19,9 +21,13 @@ EventRouter.post(
       if (!req.body.name || !req.body.propositions.length)
         return next(createError(400, "Invalid event details"));
 
+      const urlstring = randomBytes(Math.ceil(8 / 2))
+        .toString("hex")
+        .slice(0, 8);
       const event = await prisma.event.create({
         data: {
           name: req.body.name,
+          url: urlstring,
         },
       });
 
@@ -36,6 +42,26 @@ EventRouter.post(
         data: propositions,
       });
 
+      res.json(event);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+EventRouter.post(
+  "/vote",
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      if (!req.body.votes)
+        return next(createError(400, "Invalid proposition details"));
+
+      const votes = req.body.votes;
+      console.log(votes);
+      await prisma.vote.createMany({
+        data: votes,
+      });
+
       res.sendStatus(200);
     } catch (err) {
       next(err);
@@ -47,11 +73,39 @@ EventRouter.get(
   "/",
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      if (!req.body.id) return next(createError(400, "Invalid event details"));
+      let id: string;
+      if (req.query && req.query.id) {
+        id = (req.query as any).id;
+      } else {
+        return next(createError(400, "Invalid event details"));
+      }
+
+      console.log(id);
+      const event = await prisma.event.findUnique({
+        where: {
+          id,
+        },
+      });
+
+      console.log(event);
+
+      res.json(event).status(200);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+EventRouter.get(
+  "/:eventurl",
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      if (!req.params.eventurl)
+        return next(createError(400, "Invalid event details"));
 
       const event = await prisma.event.findUnique({
         where: {
-          id: req.body.id,
+          url: req.params.eventurl,
         },
         include: {
           propositions: {
@@ -65,26 +119,6 @@ EventRouter.get(
       });
 
       res.json(event).status(200);
-    } catch (err) {
-      next(err);
-    }
-  }
-);
-
-EventRouter.post(
-  "/vote/",
-  async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      if (!req.body.propId)
-        return next(createError(400, "Invalid proposition details"));
-
-      await prisma.vote.create({
-        data: {
-          propositionId: req.body.propId,
-        },
-      });
-
-      res.sendStatus(200);
     } catch (err) {
       next(err);
     }
