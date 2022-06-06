@@ -4,6 +4,7 @@
   padding: 24px;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .future-events * {
@@ -34,7 +35,8 @@
   color: white;
 }
 
-.copy-event-btn {
+.copy-event-btn,
+.delete-event-btn {
   background: none;
   border: none;
   cursor: pointer;
@@ -42,8 +44,15 @@
   position: relative;
 }
 
-.copy-event-btn > svg {
+.copy-event-btn > svg,
+.delete-event-btn > svg {
   stroke: white;
+}
+
+.delete-event-btn:hover > svg {
+  transition: transform 0.2s ease-out;
+  transform: translateX(4px);
+  fill: red;
 }
 
 .copy-text {
@@ -72,4 +81,39 @@
   letter-spacing: 2px;
   font-weight: 600;
   text-decoration: none;
+}
+
+.delete-modal {
+  position: absolute;
+  background-color: hsl(212deg 52% 30%);
+  padding: 40px;
+  width: 325px;
+  left: calc(calc(100vw / 2) - 200px);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  backdrop-filter: blur(1);
+  font-weight: 600;
+}
+
+.delete-text {
+  margin-bottom: 24px;
+  font-size: 24px;
+}
+
+.delete-buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.delete-buttons > button {
+  padding: 12px 36px;
+  border-radius: 40px;
+  background-color: rgba(255, 255, 255, 0.25);
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }

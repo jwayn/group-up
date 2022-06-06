@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import { format } from "date-fns";
 import { ReactComponent as UsersIcon } from "./users.svg";
@@ -11,24 +11,7 @@ function Event() {
   const [event, setEvent] = useState(null);
   const { eventurl } = useParams();
 
-  useEffect(() => {
-    const storedVotes = JSON.parse(window.localStorage.getItem("votes"));
-    setEventVotes(storedVotes || []);
-
-    updateEvent();
-  }, []);
-
-  const updateVotes = (event) => {
-    if (event.target.checked) {
-      setPropositionVotes([...propositionVotes, event.target.value]);
-    } else {
-      const newVotes = [...propositionVotes];
-      newVotes.splice(newVotes.indexOf(event.target.value), 1);
-      setPropositionVotes(newVotes);
-    }
-  };
-
-  const updateEvent = async () => {
+  const updateEvent = useCallback(async () => {
     const res = await fetch(
       `${process.env.REACT_APP_API_URL}/api/event/${eventurl}`,
       {
@@ -42,6 +25,23 @@ function Event() {
     );
     const eventRes = await res.json();
     setEvent(eventRes);
+  }, [eventurl]);
+
+  useEffect(() => {
+    const storedVotes = JSON.parse(window.localStorage.getItem("votes"));
+    setEventVotes(storedVotes || []);
+
+    updateEvent();
+  }, [updateEvent]);
+
+  const updateVotes = (event) => {
+    if (event.target.checked) {
+      setPropositionVotes([...propositionVotes, event.target.value]);
+    } else {
+      const newVotes = [...propositionVotes];
+      newVotes.splice(newVotes.indexOf(event.target.value), 1);
+      setPropositionVotes(newVotes);
+    }
   };
 
   const submitVotes = async () => {
