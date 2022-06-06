@@ -35,11 +35,11 @@ jobs:
         env:
             REACT_APP_API_URL: http://localhost:3000
         
-      - name: SCP Files
-        uses: appleboy/scp-action@v0.0.1
+      - name: copy file via ssh key
+        uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_KEY }}
-          source: "/build/*"
+          source: "."
           target: "/home/groupup/app"
