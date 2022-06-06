@@ -30,7 +30,10 @@ jobs:
       - name: build frontend
         working-directory: src/frontend
         run: npm run build
-      - run: mv src/frontend/build build/public
+      - run: mkdir src/public
+      - run: mv src/frontend/build/* src/public
+        env:
+          REACT_APP_API_URL: http://localhost:3000
 
       - name: copy file via ssh key
         uses: appleboy/scp-action@master
