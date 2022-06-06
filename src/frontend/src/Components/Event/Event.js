@@ -12,17 +12,14 @@ function Event() {
   const { eventurl } = useParams();
 
   const updateEvent = useCallback(async () => {
-    const res = await fetch(
-      `${process.env.REACT_APP_API_URL}/api/event/${eventurl}`,
-      {
-        method: "GET",
-        mode: "cors",
-        cache: "no-cache",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const res = await fetch(`/api/event/${eventurl}`, {
+      method: "GET",
+      mode: "cors",
+      cache: "no-cache",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     const eventRes = await res.json();
     setEvent(eventRes);
   }, [eventurl]);
@@ -45,7 +42,7 @@ function Event() {
   };
 
   const submitVotes = async () => {
-    const res = await fetch(`${process.env.REACT_APP_API_URL}/api/event/vote`, {
+    const res = await fetch(`/api/event/vote`, {
       method: "POST",
       mode: "cors",
       cache: "no-cache",
