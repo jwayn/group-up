@@ -33,6 +33,11 @@
   text-decoration: none;
   font-weight: 600;
   color: white;
+  text-align: left;
+}
+
+.event-buttons {
+  min-width: 64px;
 }
 
 .copy-event-btn,
