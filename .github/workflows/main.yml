@@ -25,13 +25,12 @@ jobs:
         run: npm run build
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-      - run: cd src/frontend
       - name: build frontend
+        working-directory: src/frontend
         run: npm run build
-      - run: mv build ../../build/public
+      - run: mv src/frontend/build build/public
         env:
             REACT_APP_API_URL: http://localhost:3000
-      - run: cd ../../build
         
       - name: SCP Files
         uses: appleboy/scp-action@v0.0.1
@@ -39,5 +38,5 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_KEY }}
-          source: "."
+          source: "/build/*"
           target: "/home/groupup/app"
