@@ -1,6 +1,7 @@
 // Import the express in typescript file
 import express from "express";
 import cors from "cors";
+import { join } from "node:path";
 
 import EventRouter from "./routes/events";
 
@@ -17,6 +18,10 @@ app.use(express.static("src/public"));
 
 // Routes
 app.use("/api/event", EventRouter);
+app.use(express.static(__dirname + "/public"));
+app.get("*", (req, res) => {
+  res.sendFile(join(__dirname + "/public/index.html"));
+});
 
 // Server setup
 app.listen(port, () => {

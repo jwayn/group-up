@@ -14,7 +14,7 @@ function App() {
     if (window.localStorage.getItem("events")) {
       setEvents(window.localStorage.getItem("events"));
     }
-  });
+  }, []);
 
   return (
     <div className="App">
