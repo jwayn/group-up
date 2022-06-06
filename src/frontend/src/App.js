@@ -3,7 +3,7 @@ import "./App.css";
 import FutureEvents from "./Components/FutureEvents";
 import NewEvent from "./Components/NewEvent";
 import Event from "./Components/Event";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 
 import { useState, useEffect } from "react";
 
@@ -19,7 +19,9 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>group up</h1>
+        <h1>
+          <Link to="/">group up</Link>
+        </h1>
       </header>
 
       <main>

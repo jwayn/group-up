@@ -11,6 +11,7 @@
   color: white;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .App-logo {
@@ -33,12 +34,19 @@
   color: white;
 }
 
+.App-header a {
+  color: white;
+  text-decoration: none;
+}
+
 .App-link {
   color: #61dafb;
 }
 
 main {
-  height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding-bottom: 24px;
 }
 
 @keyframes App-logo-spin {

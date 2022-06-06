@@ -20,6 +20,7 @@ function NewEvent() {
   };
 
   const saveProposition = () => {
+    if (!startDate) return;
     let newProps = [...propositions, { datetime: startDate }];
     newProps = newProps.sort((a, b) => a.datetime - b.datetime);
     setPropositions(newProps);
