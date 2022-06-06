@@ -38,7 +38,7 @@ function FutureEvents() {
     <div className="events">
       {events.length > 0 ? (
         <>
-          <h2>Your Events</h2>
+          <h2>Your Hosted Events</h2>
           <div className="future-events">
             {events.map((event) => (
               <div className="event" key={event.id}>
