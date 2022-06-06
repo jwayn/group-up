@@ -1,0 +1,43 @@
+
+name: Build and Deploy with scp
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@main
+      
+      - name: setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '16.x'
+      - run: npm ci
+      - name: deploy db changes
+        run: npx prisma migrate deploy
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      - name: build server
+        run: npm run build
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      - run: cd src/frontend
+      - name: build frontend
+        run: npm run build
+      - run: mv build ../../build/public
+        env:
+            REACT_APP_API_URL: http://localhost:3000
+      - run: cd ../../build
+        
+      - name: SCP Files
+        uses: appleboy/scp-action@v0.0.1
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          source: "."
+          target: "/home/groupup/app"
