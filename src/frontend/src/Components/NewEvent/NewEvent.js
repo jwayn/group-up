@@ -29,7 +29,11 @@ function NewEvent() {
 
   const submitNewEvent = async () => {
     const eventData = { name, propositions };
-    const res = await fetch(`/api/event`, {
+    let eventUrl = `/api/event`;
+    if (process.env.NODE_ENV === "development") {
+      eventUrl = process.env.REACT_APP_API_URL + eventUrl;
+    }
+    const res = await fetch(eventUrl, {
       method: "POST",
       mode: "cors",
       cache: "no-cache",

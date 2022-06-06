@@ -12,7 +12,11 @@ function Event() {
   const { eventurl } = useParams();
 
   const updateEvent = useCallback(async () => {
-    const res = await fetch(`/api/event/${eventurl}`, {
+    let eventUrl = `/api/event/${eventurl}`;
+    if (process.env.NODE_ENV === "development") {
+      eventUrl = process.env.REACT_APP_API_URL + eventUrl;
+    }
+    const res = await fetch(eventUrl, {
       method: "GET",
       mode: "cors",
       cache: "no-cache",
@@ -21,6 +25,10 @@ function Event() {
       },
     });
     const eventRes = await res.json();
+    eventRes.propositions = eventRes.propositions.sort(
+      (a, b) => new Date(a.datetime) - new Date(b.datetime)
+    );
+    console.log(eventRes.propositions);
     setEvent(eventRes);
   }, [eventurl]);
 
@@ -42,7 +50,11 @@ function Event() {
   };
 
   const submitVotes = async () => {
-    const res = await fetch(`/api/event/vote`, {
+    let voteUrl = `/api/event/vote`;
+    if (process.env.NODE_ENV === "development") {
+      voteUrl = process.env.REACT_APP_API_URL + voteUrl;
+    }
+    const res = await fetch(voteUrl, {
       method: "POST",
       mode: "cors",
       cache: "no-cache",
@@ -104,22 +116,17 @@ function Event() {
         ) : (
           <div className="voted-props">
             {event.propositions &&
-              event.propositions
-                .sort((a, b) => b._count.votes - a._count.votes)
-                .map((proposition) => (
-                  <div key={proposition.id} className="prop-line">
-                    <span className="prop-votes">
-                      {proposition._count.votes}
-                      <UsersIcon />
-                    </span>
-                    <span className="prop-date">
-                      {format(
-                        new Date(proposition.datetime),
-                        "EEEE LLL. do, y"
-                      )}
-                    </span>
-                  </div>
-                ))}
+              event.propositions.map((proposition) => (
+                <div key={proposition.id} className="prop-line">
+                  <span className="prop-votes">
+                    {proposition._count.votes}
+                    <UsersIcon />
+                  </span>
+                  <span className="prop-date">
+                    {format(new Date(proposition.datetime), "EEEE LLL. do, y")}
+                  </span>
+                </div>
+              ))}
           </div>
         )}
       </div>
