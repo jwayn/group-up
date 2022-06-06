@@ -25,6 +25,9 @@ jobs:
         run: npm run build
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      - name: install frontend
+        working-directory: src/frontend
+        run: npm ci
       - name: build frontend
         working-directory: src/frontend
         run: npm run build
