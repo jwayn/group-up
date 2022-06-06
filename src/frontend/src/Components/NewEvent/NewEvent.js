@@ -1,5 +1,5 @@
 import "./NewEvent.css";
-import { ReactComponent as DeleteIcon } from "./delete.svg";
+import { ReactComponent as DeleteIcon } from "../../delete.svg";
 
 import { useState } from "react";
 import DatePicker from "react-datepicker";

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ReactComponent as CopyIcon } from "./clipboard.svg";
+import { ReactComponent as DeleteIcon } from "../../delete.svg";
 
 import "./FutureEvents.css";
 
@@ -22,6 +23,8 @@ function FutureEvents() {
       setShowCopiedText(null);
     }, 1000);
   };
+
+  const handleDeleteEvent = (eventid) => {};
 
   return (
     <div className="events">
@@ -45,7 +48,12 @@ function FutureEvents() {
                     URL copied to clipboard!
                   </span>
                 </button>
-                <button>X</button>
+                <button
+                  className="delete-event"
+                  onClick={() => handleDeleteEvent(event.id)}
+                >
+                  <DeleteIcon />
+                </button>
               </div>
             </div>
           ))}
