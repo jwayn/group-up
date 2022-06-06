@@ -28,8 +28,9 @@ function FutureEvents() {
   const handleDeleteEvent = (event) => {
     const newEvents = [...events];
     newEvents.splice(newEvents.indexOf(event), 1);
+    console.log(newEvents);
     setEvents(newEvents);
-    window.localStorage.setItem("events", newEvents);
+    window.localStorage.setItem("events", JSON.stringify(newEvents));
     setShowDeleteModal(null);
   };
 
