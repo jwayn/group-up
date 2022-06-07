@@ -1,6 +1,6 @@
 # groupup
 
-An app for syncing everyone up.
+An app for syncing everyone up. Try it out at https://groupup.quest
 
 ## Considerations
 
