@@ -14,7 +14,8 @@ This application does not store any user state. Beyond a simple event title, all
 
 #### Steps
 
-1. `npx prisma migrate dev` from root dir
+1. `npm install` from root dir
+2. `npx prisma migrate dev` from root dir
 2. `docker-compose up` from root dir
 
 ### Starting the Server
@@ -23,8 +24,7 @@ This application does not store any user state. Beyond a simple event title, all
 
 #### Steps
 
-1. `npm install` from root dir
-2. `npm run dev` from root dir
+1. `npm run dev` from root dir
 
 ### Starting the Client
 
