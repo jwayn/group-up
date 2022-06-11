@@ -10,6 +10,7 @@ function Event() {
   const [propositionVotes, setPropositionVotes] = useState([]);
   const [event, setEvent] = useState(null);
   const { eventurl } = useParams();
+  const [eventNotFound, setEventNotFound] = useState(false);
 
   const updateEvent = useCallback(async () => {
     let eventUrl = `/api/event/${eventurl}`;
@@ -24,11 +25,17 @@ function Event() {
         "Content-Type": "application/json",
       },
     });
+
+    if (!res.ok) {
+      setEventNotFound(true);
+      return;
+    }
+
     const eventRes = await res.json();
+
     eventRes.propositions = eventRes.propositions.sort(
       (a, b) => new Date(a.datetime) - new Date(b.datetime)
     );
-    console.log(eventRes.propositions);
     setEvent(eventRes);
   }, [eventurl]);
 
@@ -79,8 +86,13 @@ function Event() {
       updateEvent();
     }
   };
-
-  if (event) {
+  if (eventNotFound) {
+    return (
+      <div className="event-details">
+        We're having trouble finding your event. Is your URL correct?
+      </div>
+    );
+  } else if (!eventNotFound && event) {
     return (
       <div className="event-details">
         {event && (
