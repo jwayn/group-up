@@ -53,14 +53,33 @@ EventRouter.post(
   "/vote",
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      if (!req.body.votes)
+      if (!req.body.votes || !req.body.eventid)
         return next(createError(400, "Invalid proposition details"));
 
+      let voteCounts = false;
+      if (req.body.votes.length) {
+        voteCounts = true;
+      }
+
       const votes = req.body.votes;
-      console.log(votes);
+
       await prisma.vote.createMany({
         data: votes,
       });
+
+      // Update the vote count on the event if we have > 0 votes
+      if (voteCounts) {
+        await prisma.event.update({
+          where: {
+            id: req.body.eventid,
+          },
+          data: {
+            voteCount: {
+              increment: 1,
+            },
+          },
+        });
+      }
 
       res.sendStatus(200);
     } catch (err) {
