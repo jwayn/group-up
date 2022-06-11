@@ -99,14 +99,11 @@ EventRouter.get(
         return next(createError(400, "Invalid event details"));
       }
 
-      console.log(id);
       const event = await prisma.event.findUnique({
         where: {
           id,
         },
       });
-
-      console.log(event);
 
       res.json(event).status(200);
     } catch (err) {
@@ -136,6 +133,8 @@ EventRouter.get(
           },
         },
       });
+
+      if (!event) return res.sendStatus(404);
 
       res.json(event).status(200);
     } catch (err) {
