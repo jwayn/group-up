@@ -97,3 +97,13 @@ input[type="checkbox"]:checked::before {
 .prop-date {
   font-weight: 600;
 }
+
+.event-details > h2 {
+  margin: 0;
+  margin-bottom: 8px;
+}
+
+.event-details > h3 {
+  margin: 0;
+  margin-bottom: 24px;
+}
