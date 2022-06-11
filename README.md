@@ -4,7 +4,7 @@ An app for syncing everyone up.
 
 ## Considerations
 
-This application does not store any user state. Beyond a simple event title, all interactions and data are completely anonymous. A list of created events and voted-for events are stored in the browser with the local storage API. Deleting an event _does not_ delete it from the server and/or database, but instead merely removes the reference stored in the browser.
+This application does not store any user data. Beyond a simple event title, all interactions and data are completely anonymous. A list of created events and voted-for events are stored in the browser with the local storage API. Deleting an event _does not_ delete it from the server and/or database, but instead merely removes the reference stored in the browser.
 
 ## Development
 
