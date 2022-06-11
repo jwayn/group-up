@@ -1,10 +1,10 @@
 # groupup
 
-An app for syncing everyone up.
+An app for syncing everyone up. Try it out at https://groupup.quest
 
 ## Considerations
 
-This application does not store any user data. Beyond a simple event title, all interactions and data are completely anonymous. A list of created events and voted-for events are stored in the browser with the local storage API. Deleting an event _does not_ delete it from the server and/or database, but instead merely removes the reference stored in the browser.
+This application, by design, does not store any user information on the server at the moment. Beyond a simple event title, all interactions and data are completely anonymous. A list of created events and voted-for events are stored in the browser with the local storage API. Deleting an event _does not_ delete it from the server and/or database, but instead merely removes the reference stored in the browser.
 
 ## Development
 
@@ -14,8 +14,9 @@ This application does not store any user data. Beyond a simple event title, all 
 
 #### Steps
 
-1. `npx prisma migrate dev` from root dir
-2. `docker-compose up` from root dir
+1. `npm install` from root dir
+2. `npx prisma migrate dev` from root dir
+3. `docker-compose up` from root dir
 
 ### Starting the Server
 
@@ -23,8 +24,7 @@ This application does not store any user data. Beyond a simple event title, all 
 
 #### Steps
 
-1. `npm install` from root dir
-2. `npm run dev` from root dir
+1. `npm run dev` from root dir
 
 ### Starting the Client
 

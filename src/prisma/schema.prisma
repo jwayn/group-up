@@ -15,6 +15,7 @@ model Event {
   name          String        @db.Text
   createdAt     DateTime      @default(now())
   url           String        @db.Text @unique
+  voteCount     Int           @default(0)
   propositions  Proposition[]
 }
 

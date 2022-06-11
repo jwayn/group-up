@@ -65,6 +65,7 @@ function Event() {
         votes: propositionVotes.map((propVote) => {
           return { propositionId: propVote };
         }),
+        eventid: event.id,
       }),
     });
 
@@ -82,7 +83,15 @@ function Event() {
   if (event) {
     return (
       <div className="event-details">
-        {event && <h2>{event.name}</h2>}
+        {event && (
+          <>
+            <h2>{event.name}</h2>
+            <h3>
+              {event.voteCount}
+              {event.voteCount === 1 ? " vote" : " votes"}
+            </h3>
+          </>
+        )}
         {!eventVotes?.includes(event.id) ? (
           <div className="event-props">
             <h3>What dates work best for you?</h3>
