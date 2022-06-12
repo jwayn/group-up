@@ -98,10 +98,12 @@ function Event() {
         {event && (
           <>
             <h2>{event.name}</h2>
-            <h3>
-              {event.voteCount}
-              {event.voteCount === 1 ? " vote" : " votes"}
-            </h3>
+            {eventVotes?.includes(event.id) && (
+              <h3>
+                {event.voteCount}
+                {event.voteCount === 1 ? " vote" : " votes"}
+              </h3>
+            )}
           </>
         )}
         {!eventVotes?.includes(event.id) ? (
