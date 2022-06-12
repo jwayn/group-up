@@ -108,6 +108,10 @@ function NewEvent() {
               <DatePicker
                 selected={startDate}
                 onChange={(date) => setStartDate(date)}
+                minDate={new Date()}
+                excludeDates={propositions.map(
+                  (proposition) => proposition.datetime
+                )}
               />
               <div className="time-slot-btn-container">
                 <button className="cancel-time-slot" onClick={closeTimeSlot}>
