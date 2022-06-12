@@ -118,7 +118,7 @@ function NewEvent() {
                   Cancel
                 </button>
                 <button className="save-time-slot" onClick={saveProposition}>
-                  Save Time Slot
+                  Add Time Slot
                 </button>
               </div>
             </div>
